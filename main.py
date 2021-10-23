@@ -125,7 +125,7 @@ if __name__ == "__main__":
                              weights=weights).to(device)
 
     '''
-    C = 2 = number of classes
+    C = 5 = number of classes
     S = 5 = number of samples in support set for each class
     vocab_size = size of vocabulary built from training set using Vocabulary()
     embed_size = 300 = length of word2vec vectors

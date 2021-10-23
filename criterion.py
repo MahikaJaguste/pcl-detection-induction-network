@@ -3,7 +3,7 @@ from torch.nn.modules.loss import _Loss
 
 
 class Criterion(_Loss):
-    def __init__(self, way=2, shot=5):
+    def __init__(self, way=5, shot=5):
         super(Criterion, self).__init__()
         self.amount = way * shot
 
