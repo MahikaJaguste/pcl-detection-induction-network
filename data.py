@@ -277,6 +277,6 @@ if __name__ == "__main__":
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
 
-    kwargs = {'num_workers': 4, 'pin_memory': True} if torch.cuda.is_available() else {}
+    kwargs = {'num_workers': 2, 'pin_memory': True} if torch.cuda.is_available() else {}
     data_path = config['data']['path']
     main()
