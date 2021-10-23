@@ -36,7 +36,7 @@ def dev(episode):
         target = target.to(device)
         predict = model(data)
         _, acc = criterion(predict, target)
-        amount = len(target) - support * 2
+        amount = len(target) - support * 5
         correct += acc * amount
         count += amount
     acc = correct / count
@@ -54,7 +54,7 @@ def test():
         target = target.to(device)
         predict = model(data)
         _, acc = criterion(predict, target)
-        amount = len(target) - support * 2
+        amount = len(target) - support * 5
         correct += acc * amount
         count += amount
     acc = correct / count
