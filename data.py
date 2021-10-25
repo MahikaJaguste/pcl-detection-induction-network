@@ -156,7 +156,6 @@ def get_vocabulary(data, min_freq):
             for word_list in data[filename][value]['data']:
                 vocabulary.add_word_lst(word_list)
     vocabulary.build_vocab()
-    print(type(vocabulary))
     print('vocab size', len(vocabulary), 'pad', vocabulary.padding_idx, 'unk', vocabulary.unknown_idx)
     return vocabulary
 
