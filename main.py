@@ -37,6 +37,7 @@ def dev(episode):
         predict = model(data)
         # print("predict ", predict)
         # print("target", target)
+        print("length of target", len(target))
         _, acc = criterion(predict, target)
         print("dev acc = ",acc)
         amount = len(target) - support * 5
