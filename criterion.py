@@ -9,9 +9,14 @@ class Criterion(_Loss):
 
     def forward(self, probs, target):  # (Q,C) (Q)
         target = target[self.amount:]
-        print("--- target in criterion : ", target[self.amount:self.amount+3])
+        # print("--- target in criterion : ", target[self.amount:self.amount+3])
         target_onehot = torch.zeros_like(probs)
         target_onehot = target_onehot.scatter(1, target.reshape(-1, 1), 1)
+        print("--- target_onehot in criterion : ", target_onehot[self.amount:self.amount+3])
+        print("probs shape", len(probs))
+        print("probs = ", probs)
+        print("target shape = ", target.shape[0])
+        print("target_onehot shape = ", target_onehot.shape[0])
         loss = torch.mean((probs - target_onehot) ** 2)
         pred = torch.argmax(probs, dim=1)
         acc = torch.sum(target == pred).float() / target.shape[0]
