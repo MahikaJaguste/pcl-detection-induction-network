@@ -26,7 +26,8 @@ def _parse_list(data_path, list_name):
 def get_domains(data_path, filtered_name, target_name):
     all_domains = _parse_list(data_path, filtered_name)
     test_domains = _parse_list(data_path, target_name)
-    train_domains = all_domains - test_domains
+    # train_domains = all_domains - test_domains
+    train_domains = all_domains
     print('train domains', len(train_domains), 'test_domains', len(test_domains))
     return sorted(list(train_domains)), sorted(list(test_domains))
 
@@ -135,7 +136,7 @@ def _combine_data(support_data, data):
 
 def get_test_data(data_path, domains):
     # get dev, test data
-    support_data = _get_data(data_path, domains, 'train')
+    support_data = _get_data(data_path, domains, 'support')
     dev_data = _get_data(data_path, domains, 'dev')
     test_data = _get_data(data_path, domains, 'test')
 
