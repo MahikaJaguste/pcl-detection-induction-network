@@ -38,9 +38,13 @@ def dev(episode):
         print("predict ", predict)
         print("target", target)
         _, acc = criterion(predict, target)
+        print("dev acc = ",acc)
         amount = len(target) - support * 5
+        print("dev amount = ",amount)
         correct += acc * amount
+        print("correct = ", correct)
         count += amount
+        print("count = ", count)
     acc = correct / count
     writer.add_scalar('dev_acc', acc, episode)
     print('Dev Episode: {} Acc: {}'.format(episode, acc))

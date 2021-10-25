@@ -214,11 +214,11 @@ def get_test_loader(full_data, support, query, pad_idx):
         support_target = torch.tensor(support_target)
 
         # query
-        degree_0_dl = DataLoader(Dataset(full_data[filename]['degree_0'], pad_idx), batch_size=query * 5, shuffle=False, drop_last=False, **kwargs)
-        degree_1_dl = DataLoader(Dataset(full_data[filename]['degree_1'], pad_idx), batch_size=query * 5, shuffle=False, drop_last=False, **kwargs)
-        degree_2_dl = DataLoader(Dataset(full_data[filename]['degree_2'], pad_idx), batch_size=query * 5, shuffle=False, drop_last=False, **kwargs)
-        degree_3_dl = DataLoader(Dataset(full_data[filename]['degree_3'], pad_idx), batch_size=query * 5, shuffle=False, drop_last=False, **kwargs)
-        degree_4_dl = DataLoader(Dataset(full_data[filename]['degree_4'], pad_idx), batch_size=query * 5, shuffle=False, drop_last=False, **kwargs)
+        degree_0_dl = DataLoader(Dataset(full_data[filename]['degree_0'], pad_idx), batch_size=query , shuffle=False, drop_last=False, **kwargs)
+        degree_1_dl = DataLoader(Dataset(full_data[filename]['degree_1'], pad_idx), batch_size=query , shuffle=False, drop_last=False, **kwargs)
+        degree_2_dl = DataLoader(Dataset(full_data[filename]['degree_2'], pad_idx), batch_size=query , shuffle=False, drop_last=False, **kwargs)
+        degree_3_dl = DataLoader(Dataset(full_data[filename]['degree_3'], pad_idx), batch_size=query , shuffle=False, drop_last=False, **kwargs)
+        degree_4_dl = DataLoader(Dataset(full_data[filename]['degree_4'], pad_idx), batch_size=query , shuffle=False, drop_last=False, **kwargs)
         
         # combine
         for dl in [degree_0_dl, degree_1_dl, degree_2_dl, degree_3_dl, degree_4_dl]:
@@ -227,6 +227,7 @@ def get_test_loader(full_data, support, query, pad_idx):
                 support_data_cp, batch_data = padding_2(support_data_cp, batch_data, pad_idx)
                 data = torch.cat([support_data_cp, batch_data], dim=0)
                 target = torch.cat([support_target_cp, batch_target], dim=0)
+                print("length of support_data, length of batch data = ", len(support_data), len(batch_data))
                 loader.append((data, target))
     print('test loader length', len(loader))
     return loader
