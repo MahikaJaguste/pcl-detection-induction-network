@@ -227,7 +227,9 @@ def get_test_loader(full_data, support, query, pad_idx):
                 support_data_cp, batch_data = padding_2(support_data_cp, batch_data, pad_idx)
                 data = torch.cat([support_data_cp, batch_data], dim=0)
                 target = torch.cat([support_target_cp, batch_target], dim=0)
+
                 print("length of support_data, length of batch data = ", len(support_data), len(batch_data))
+                print("length of support target, length of target", len(support_target), len(target))
                 loader.append((data, target))
     print('test loader length', len(loader))
     return loader
