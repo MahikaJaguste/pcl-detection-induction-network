@@ -126,7 +126,7 @@ def get_train_data(data_path, domains):
 def _combine_data(support_data, data):
     # support -> dev, test
     for key in data:
-        key_split = key.split('.')[0:-1] + ['train']
+        key_split = key.split('.')[0:-1] + ['support']
         support_key = '.'.join(key_split)
         for value in data[key]:
             data[key][value]['support_data'] = copy.deepcopy(support_data[support_key][value]['data'])
@@ -230,8 +230,8 @@ def get_test_loader(full_data, support, query, pad_idx):
                 data = torch.cat([support_data_cp, batch_data], dim=0)
                 target = torch.cat([support_target_cp, batch_target], dim=0)
 
-                print("length of support_data, length of batch data = ", len(support_data), len(batch_data))
-                print("length of support target, length of target", len(support_target), len(target))
+                # print("length of support_data, length of batch data = ", len(support_data), len(batch_data))
+                # print("length of support target, length of target", len(support_target), len(target))
                 loader.append((data, target))
     print('test loader length', len(loader))
     return loader
