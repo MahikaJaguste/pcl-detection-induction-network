@@ -31,7 +31,7 @@ def get_domains(data_path, filtered_name, target_name):
     print('train domains', len(train_domains), 'test_domains', len(test_domains))
     return sorted(list(train_domains)), sorted(list(test_domains))
 
-
+## single file
 def _parse_data(data_path, filename):
     degree_0 = {
         'filename': filename,
