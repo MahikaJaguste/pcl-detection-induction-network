@@ -25,6 +25,8 @@ def train(episode):
     writer.add_scalar('train_acc', acc, episode)
     if episode % log_interval == 0:
         print('Train Episode: {} Loss: {} Acc: {}'.format(episode, loss.item(), acc))
+    
+    return acc
 
 
 def dev(episode):
@@ -72,10 +74,17 @@ def test():
 
 def main():
     best_episode, best_acc = 0, 0.
+    best_train = 0.0
+    best_train_ep = 0
     episodes = int(config['model']['episodes'])
     early_stop = int(config['model']['early_stop']) * dev_interval
     for episode in range(1, episodes + 1):
-        train(episode)
+
+        train_acc = train(episode)
+        if(train_acc > best_train):
+            best_train = train_acc
+            best_train_ep = episode
+
         if episode % dev_interval == 0:
             acc = dev(episode)
             if acc > best_acc:
@@ -86,6 +95,7 @@ def main():
                 print('Early stop at episode', episode)
                 break
 
+    print('Best training accuracy is ', best_train, 'on episode', best_train_ep)
     print('Reload the best model on episode', best_episode, 'with best acc', best_acc.item())
     ckpt = torch.load(config['model']['model_path'])
     model.load_state_dict(ckpt)
