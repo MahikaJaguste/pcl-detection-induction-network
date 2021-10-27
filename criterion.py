@@ -19,8 +19,8 @@ class Criterion(_Loss):
         # print("target_onehot shape = ", target_onehot.shape[0])
         loss = torch.mean((probs - target_onehot) ** 2)
         pred = torch.argmax(probs, dim=1)
-        print("\nPrinting target,pred")
-        print(target,pred)
+        # print("\nPrinting target,pred")
+        # print(target,pred)
         # print("pred = ", pred)
         acc = torch.sum(target == pred).float() / target.shape[0]
         return loss, acc
