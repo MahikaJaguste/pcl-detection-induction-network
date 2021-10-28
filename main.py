@@ -58,10 +58,14 @@ def test():
     model.eval()
     correct = 0.
     count = 0.
+    y_pred = []
+    y_test = []
     for data, target in test_loader:
         data = data.to(device)
         target = target.to(device)
         predict = model(data)
+        print(type(target), target)
+        print(type(predict), predict)
         _, acc = criterion(predict, target)
         amount = len(target) - support * 5
         correct += acc * amount
