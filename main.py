@@ -96,8 +96,8 @@ def test():
         print("target", type(target[amount:].tolist()), target[amount:].tolist())
         print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
 
-        y_test.append(target[amount:].tolist())
-        y_pred.append(torch.argmax(predict, dim=1).tolist())
+        y_test= y_test + (target[amount:].tolist())
+        y_pred = y_pred + (torch.argmax(predict, dim=1).tolist())
 
         ###################################
         _, acc = criterion(predict, target)
