@@ -82,19 +82,19 @@ def test():
 
     way=int(config['model']['class'])
     shot=int(config['model']['support'])
-    print(way)
-    print(shot)
+    # print(way)
+    # print(shot)
     amount = way*shot
-    print(amount)
+    # print(amount)
 
     for data, target in test_loader:
         data = data.to(device)
         target = target.to(device)
         predict = model(data)
         ####################################
-        print("len of target = ", len(target[35:55].tolist()), "len of pred = ", len(predict.tolist()))
-        print("target", type(target[amount:].tolist()), target[amount:].tolist())
-        print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
+        # print("len of target = ", len(target[35:55].tolist()), "len of pred = ", len(predict.tolist()))
+        # print("target", type(target[amount:].tolist()), target[amount:].tolist())
+        # print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
 
         y_test= y_test + (target[35:55].tolist())
         y_pred = y_pred + (torch.argmax(predict, dim=1).tolist())
@@ -138,7 +138,7 @@ def main():
     ckpt = torch.load(config['model']['model_path'])
     model.load_state_dict(ckpt)
     _, y_test, y_pred = test()
-    print(len(y_test),len(y_pred))
+    # print(len(y_test),len(y_pred))
     results(y_test, y_pred)
 
 
