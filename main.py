@@ -74,8 +74,8 @@ def test():
         predict = model(data)
         ####################################
 
-        print(type(target[amount:].tolist()), target[amount:].tolist())
-        print(type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
+        print("target", type(target[amount:].tolist()), target[amount:].tolist())
+        print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
 
         y_test.append(target[amount:].tolist())
         y_pred.append(torch.argmax(predict, dim=1).tolist())
