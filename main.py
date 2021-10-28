@@ -9,6 +9,25 @@ from model import FewShotInduction
 from criterion import Criterion
 from tensorboardX import SummaryWriter
 
+import sklearn.metrics
+from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import confusion_matrix
+
+
+def results(y_test, y_pred):
+  conf_mat = confusion_matrix(y_test, y_pred)
+  print("Confusion matrix")
+  print(conf_mat)
+  count = 0
+  for i in range(len(y_test)):
+    if(y_test[i] == y_pred[i]):
+      count+=1
+  accuracy = count/len(y_test)
+  print("Accuracy = ", accuracy)
+  print(precision_recall_fscore_support(y_test, y_pred, average='macro'))
+  print(precision_recall_fscore_support(y_test, y_pred, average='micro'))
+  print(precision_recall_fscore_support(y_test, y_pred, average='weighted'))
+
 
 def train(episode):
     model.train()
@@ -74,8 +93,8 @@ def test():
         predict = model(data)
         ####################################
         print("len of target = ", len(target.tolist()), "len of pred = ", len(predict.tolist()))
-        # print("target", type(target[amount:].tolist()), target[amount:].tolist())
-        # print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
+        print("target", type(target[amount:].tolist()), target[amount:].tolist())
+        print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
 
         y_test.append(target[amount:].tolist())
         y_pred.append(torch.argmax(predict, dim=1).tolist())
@@ -118,7 +137,8 @@ def main():
     # print('Reload the best model on episode', best_episode, 'with best acc', best_acc.item())
     # ckpt = torch.load(config['model']['model_path'])
     # model.load_state_dict(ckpt)
-    test()
+    _, y_test, y_pred = test()
+    results(y_test, y_pred)
 
 
 if __name__ == "__main__":
