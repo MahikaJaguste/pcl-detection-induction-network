@@ -73,32 +73,32 @@ def test():
 
 
 def main():
-    best_episode, best_acc = 0, 0.
-    best_train = 0.0
-    best_train_ep = 0
-    episodes = int(config['model']['episodes'])
-    early_stop = int(config['model']['early_stop']) * dev_interval
-    for episode in range(1, episodes + 1):
+    # best_episode, best_acc = 0, 0.
+    # best_train = 0.0
+    # best_train_ep = 0
+    # episodes = int(config['model']['episodes'])
+    # early_stop = int(config['model']['early_stop']) * dev_interval
+    # for episode in range(1, episodes + 1):
 
-        train_acc = train(episode)
-        if(train_acc > best_train):
-            best_train = train_acc
-            best_train_ep = episode
+    #     train_acc = train(episode)
+    #     if(train_acc > best_train):
+    #         best_train = train_acc
+    #         best_train_ep = episode
 
-        if episode % dev_interval == 0:
-            acc = dev(episode)
-            if acc > best_acc:
-                print('Better acc! Saving model!')
-                torch.save(model.state_dict(), config['model']['model_path'])
-                best_episode, best_acc = episode, acc
-            if episode - best_episode >= early_stop:
-                print('Early stop at episode', episode)
-                break
+    #     if episode % dev_interval == 0:
+    #         acc = dev(episode)
+    #         if acc > best_acc:
+    #             print('Better acc! Saving model!')
+    #             torch.save(model.state_dict(), config['model']['model_path'])
+    #             best_episode, best_acc = episode, acc
+    #         if episode - best_episode >= early_stop:
+    #             print('Early stop at episode', episode)
+    #             break
 
-    print('Best training accuracy is ', best_train, 'on episode', best_train_ep)
-    print('Reload the best model on episode', best_episode, 'with best acc', best_acc.item())
-    ckpt = torch.load(config['model']['model_path'])
-    model.load_state_dict(ckpt)
+    # print('Best training accuracy is ', best_train, 'on episode', best_train_ep)
+    # print('Reload the best model on episode', best_episode, 'with best acc', best_acc.item())
+    # ckpt = torch.load(config['model']['model_path'])
+    # model.load_state_dict(ckpt)
     test()
 
 
@@ -152,6 +152,7 @@ if __name__ == "__main__":
     outsize = 100 (relation_dim)
     weights = word2ve weights obtained on training data
     '''
+    model.load_state_dict(torch.load(config['model']['model_path']))
     optimizer = optim.Adam(model.parameters(), lr=float(config['model']['lr']))
     criterion = Criterion(way=int(config['model']['class']),
                           shot=int(config['model']['support']))
