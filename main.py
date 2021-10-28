@@ -92,11 +92,11 @@ def test():
         target = target.to(device)
         predict = model(data)
         ####################################
-        print("len of target = ", len(target[amount:].tolist()), "len of pred = ", len(predict.tolist()))
+        print("len of target = ", len(target[35:55].tolist()), "len of pred = ", len(predict.tolist()))
         print("target", type(target[amount:].tolist()), target[amount:].tolist())
         print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
 
-        y_test= y_test + (target[amount:].tolist())
+        y_test= y_test + (target[35:55].tolist())
         y_pred = y_pred + (torch.argmax(predict, dim=1).tolist())
 
         ###################################
