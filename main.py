@@ -63,6 +63,8 @@ def test():
 
     way=int(config['model']['class']),
     shot=int(config['model']['support'])
+    print(way)
+    print(shot)
     amount = way*shot
     print(amount)
 
