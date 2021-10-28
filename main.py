@@ -138,6 +138,7 @@ def main():
     # ckpt = torch.load(config['model']['model_path'])
     # model.load_state_dict(ckpt)
     _, y_test, y_pred = test()
+    print(y_test,y_pred)
     results(y_test, y_pred)
 
 
