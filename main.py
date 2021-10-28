@@ -73,9 +73,9 @@ def test():
         target = target.to(device)
         predict = model(data)
         ####################################
-
-        print("target", type(target[amount:].tolist()), target[amount:].tolist())
-        print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
+        print("len of target = ", len(target.tolist()), "len of pred = ", len(predict.tolist()))
+        # print("target", type(target[amount:].tolist()), target[amount:].tolist())
+        # print("prediction",type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
 
         y_test.append(target[amount:].tolist())
         y_pred.append(torch.argmax(predict, dim=1).tolist())
