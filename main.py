@@ -64,17 +64,19 @@ def test():
     way=int(config['model']['class']),
     shot=int(config['model']['support'])
     amount = way*shot
+    print(amount)
 
     for data, target in test_loader:
         data = data.to(device)
         target = target.to(device)
         predict = model(data)
         ####################################
-        y_test.append(target[amount:].tolist())
-        y_pred.append(torch.argmax(predict, dim=1).tolist())
 
         print(type(target[amount:].tolist()), target[amount:].tolist())
         print(type(torch.argmax(predict, dim=1).tolist()),torch.argmax(predict, dim=1).tolist())
+
+        y_test.append(target[amount:].tolist())
+        y_pred.append(torch.argmax(predict, dim=1).tolist())
 
         ###################################
         _, acc = criterion(predict, target)
