@@ -61,7 +61,7 @@ def test():
     y_pred = []
     y_test = []
 
-    way=int(config['model']['class'][0]),
+    way=int(config['model']['class'])
     shot=int(config['model']['support'])
     print(way)
     print(shot)
